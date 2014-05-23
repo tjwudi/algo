@@ -8,11 +8,10 @@ String.prototype.repeat = function(times) {
 };
 
 var justify = function(str, len) {
-  var words = str.split(' '),
+  var words = str.replace(/^\s+/g, '').replace(/\s+$/g, '').replace(/\s+/g, ' ').split(' '),
       curWords = [],
       curLen = 0,
       result = '';
-  
   
   words.map(function insert(word, idx) {
     if (curLen + word.length + curWords.length <= len) {
@@ -22,7 +21,7 @@ var justify = function(str, len) {
       if (idx === words.length - 1) {
         curWords.map(function(word, idx) {
           result += word;
-          result += (idx === curWords.length - 1) ? '\n' : ' ';
+          result += (idx === curWords.length - 1) ? '' : ' ';
         });
       }
     }
@@ -47,6 +46,3 @@ var justify = function(str, len) {
   
   return result;
 };
-
-
-console.log(justify('Loremddsasadaswe ipsum dolor sit amet, consectetur adipisicing elit. Assumenda sapiente iure libero delectus vel ducimus unde commodi debitis optio quae perferendis odit sint quam ipsum quod accusamus in voluptas necessitatibus! sda 1e1 dasd sadq23 1 casd ad12 dasd ad asdas dasdqwe 1d aas dasd qdqw qwd qw', 20));
